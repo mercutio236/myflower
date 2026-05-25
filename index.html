@@ -346,23 +346,25 @@
         }
 
         .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.2s;
-            backdrop-filter: blur(2px);
-        }
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    z-index: 998;  /* МЕНЯЕМ: был 999, теперь ниже меню */
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    pointer-events: none; /* КЛЮЧЕВОЕ: оверлей не перехватывает клики */
+}
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Включаем только когда активен, но осторожно */
+          }
         @media (max-width: 768px) {
             .container {
                 padding: 0 16px;
@@ -371,28 +373,23 @@
                 display: block;
             }
             .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 75%;
-                max-width: 280px;
-                height: 100vh;
-                background: var(--cream);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                box-shadow: -5px 0 25px rgba(0,0,0,0.1);
-                z-index: 1000;
-                transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-                padding: 2rem 1rem;
-            }
-            .nav-links.active {
-                right: 0;
-            }
-            .nav-links a {
-                font-size: 1.3rem;
-            }
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 280px;
+    height: 100vh;
+    background: var(--cream);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+    z-index: 1000; /* Выше оверлея */
+    transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    padding: 2rem 1rem;
+    list-style: none;
+}​
             .products-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
