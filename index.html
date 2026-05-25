@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Maison Fleur | Роскошный цветочный бутик</title>
+    <!-- Подключение шрифтов Google Fonts для элегантности -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (бесплатные иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FAF6F0;  /* тепло-кремовый фон, подчеркивающий роскошь */
+            color: #1E2A2B;
+            line-height: 1.4;
+        }
+
+        /* Цветовая палитра: изумрудный (изумруд), алый (роял-багрянец), золотистые акценты */
+        :root {
+            --emerald: #0F4C3A;      /* глубокий изумрудный */
+            --emerald-light: #1B5E4A;
+            --scarlet: #B23C2E;      /* благородный алый */
+            --scarlet-light: #C74C3C;
+            --gold: #D4AF37;          /* золото для акцентов */
+            --gold-light: #E8C96E;
+            --dark-charcoal: #1F2A28;
+            --cream: #FFF9F2;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, .logo, .nav-links a, .hero-title, .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* ========= ШАПКА С ПОЛУКРУГЛОЙ ФОТОГРАФИЕЙ ========= */
+        .header-top {
+            background: var(--emerald);
+            color: white;
+            padding: 12px 0;
+            font-size: 13px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .main-header {
+            background: var(--cream);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--emerald);
+            letter-spacing: 2px;
+        }
+        .logo span {
+            color: var(--scarlet);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--dark-charcoal);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--scarlet);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        /* полукруглая фотография с цветами (роскошный акцент) */
+        .hero-semicircle {
+            background: linear-gradient(145deg, #fff6eb 0%, #faeedf 100%);
+            padding: 50px 0 30px 0;
+            text-align: center;
+        }
+
+        .semicircle-img {
+            display: inline-block;
+            width: 280px;
+            height: 140px;
+            background: url('https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=600') center/cover no-repeat;
+            border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+            box-shadow: var(--shadow-lg), 0 10px 20px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--gold);
+            transition: transform 0.4s;
+        }
+
+        .semicircle-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* дополнительные декоративные элементы */
+        .hero-text {
+            margin-top: 25px;
+        }
+        .hero-text h1 {
+            font-size: 2.8rem;
+            color: var(--emerald);
+        }
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #4a5b52;
+            max-width: 600px;
+            margin: 12px auto 0;
+        }
+
+        /* КАРТОЧКИ ТОВАРОВ (ассортимент) */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 60px 0 40px;
+            color: var(--emerald);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 12px auto 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 35px;
+            margin-bottom: 70px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold-light);
+        }
+
+        .card-img {
+            height: 260px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .card-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: var(--scarlet);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 40px;
+            letter-spacing: 1px;
+        }
+        .card-info {
+            padding: 20px 18px 24px;
+        }
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--emerald);
+            margin-bottom: 6px;
+        }
+        .card-desc {
+            font-size: 0.85rem;
+            color: #5b6e64;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--scarlet);
+            font-family: 'Montserrat', sans-serif;
+            margin: 12px 0;
+        }
+        .btn-order {
+            background: transparent;
+            border: 1.5px solid var(--emerald);
+            color: var(--emerald);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .btn-order:hover {
+            background: var(--emerald);
+            color: white;
+            border-color: var(--emerald);
+        }
+
+        /* кнопка на главной для перехода в каталог (к ассортименту) */
+        .btn-catalog {
+            display: inline-block;
+            background: var(--scarlet);
+            color: white;
+            padding: 14px 42px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 20px 0 50px;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 5px 12px rgba(178, 60, 46, 0.3);
+        }
+        .btn-catalog:hover {
+            background: var(--emerald);
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(15, 76, 58, 0.3);
+        }
+
+        /* футер */
+        .footer {
+            background: var(--emerald);
+            color: #e4ddd1;
+            padding: 50px 0 25px;
+            margin-top: 60px;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .footer-col h4 {
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-bottom: 18px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .footer-col p, .footer-col li {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .social-icons a {
+            color: #ffefcf;
+            font-size: 1.3rem;
+            margin-right: 20px;
+            transition: color 0.2s;
+        }
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            font-size: 0.75rem;
+        }
+
+        /* страница каталога (отдельный контент) */
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .active-page {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* для сообщения "заказ" */
+        .toast-notify {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--emerald);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .toast-notify.show {
+            opacity: 1;
+        }
+        @media (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .semicircle-img {
+                width: 200px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-top">
+    <i class="fas fa-truck"></i> Бесплатная доставка по Парижу и пригородам | <i class="fas fa-gem"></i> Роскошные композиции
+</div>
+
+<header class="main-header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h2>MAISON <span>FLEUR</span></h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" data-page="home" class="nav-link active">Главная</a></li>
+                <li><a href="#" data-page="catalog" class="nav-link">Ассортимент</a></li>
+                <li><a href="#" data-page="about" class="nav-link">О нас</a></li>
+                <li><a href="#" data-page="contacts" class="nav-link">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <div id="home-page" class="page active-page">
+        <div class="hero-semicircle">
+            <div class="container">
+                <div class="semicircle-img"></div>
+                <div class="hero-text">
+                    <h1>Art floral à la française</h1>
+                    <p>Изысканные букеты, достойные Версаля. Алый мак, изумрудный эвкалипт и золотые ноты роскоши.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 class="section-title">Популярные композиции</h2>
+                <div class="products-grid" id="preview-products">
+                    <!-- динамически заполняется избранными товарами -->
+                </div>
+                <div style="text-align: center;">
+                    <button id="goToCatalogBtn" class="btn-catalog"><i class="fas fa-flower"></i> Весь ассортимент →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА АССОРТИМЕНТА (каталог) -->
+    <div id="catalog-page" class="page">
+        <div class="container">
+            <h2 class="section-title">Наши роскошные букеты</h2>
+            <div class="products-grid" id="full-catalog-grid"></div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА О НАС -->
+    <div id="about-page" class="page">
+        <div class="container">
+            <div style="max-width: 800px; margin: 50px auto; text-align: center;">
+                <h2 style="color: var(--emerald); font-size: 2.3rem;">Легенда дома <span style="color: var(--scarlet);">Maison Fleur</span></h2>
+                <p style="margin: 25px 0; line-height: 1.6;">Основанный в сердце Прованса, наш бутик с 1987 года создаёт цветочные шедевры, вдохновляясь эстетикой французских королевских дворцов. Алые розы, изумрудная зелень и золотистый статис — наша визитная карточка. Каждый букет — это ода любви, страсти и изяществу.</p>
+                <div style="background: #E8DCC8; border-radius: 60px; padding: 20px; margin-top: 30px;">
+                    <i class="fas fa-leaf" style="color: var(--emerald); font-size: 2rem;"></i>
+                    <p style="font-style: italic;">«Цветы — это совершенство природы, облаченное в роскошь»</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА КОНТАКТЫ -->
+    <div id="contacts-page" class="page">
+        <div class="container">
+            <div style="max-width: 700px; margin: 50px auto;">
+                <h2 class="section-title">Салон в Париже</h2>
+                <div style="background: white; border-radius: 32px; padding: 30px; box-shadow: var(--shadow-sm);">
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--scarlet); width: 30px;"></i> 24 Rue du Faubourg Saint-Honoré, 75008 Paris</p>
+                    <p><i class="fas fa-phone-alt" style="color: var(--scarlet);"></i> +33 1 45 62 18 90</p>
+                    <p><i class="fas fa-envelope" style="color: var(--scarlet);"></i> bonjour@maisonfleur.fr</p>
+                    <hr style="margin: 20px 0; border-color: #e2d5bf;">
+                    <p><strong>Часы работы:</strong><br> Вторник–Суббота: 10:00 – 19:00<br> Воскресенье: 11:00 – 17:00</p>
+                    <div class="social-icons" style="margin-top: 25px;">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Maison Fleur</h4>
+                <p>Роскошь в каждой детали. <br>Цветы, которые говорят громче слов.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Помощь</h4>
+                <ul>
+                    <li>Доставка по всему миру</li>
+                    <li>Консьерж-сервис</li>
+                    <li>Флористические мастер-классы</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Следите за нами</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 Maison Fleur — Французский цветочный дом. Элегантность вне времени.
+        </div>
+    </div>
+</footer>
+
+<div id="toastMsg" class="toast-notify">✨ Букет добавлен в корзину (демо-режим)</div>
+
+<script>
+    // БАЗА ТОВАРОВ ДЛЯ АССОРТИМЕНТА (роскошные букеты, алые и изумрудные акценты)
+    const catalogItems = [
+        { id: 1, name: "Алый триумф", desc: "Букет из 51 алой розы, эвкалипт и ягоды гипсофилы", price: "€159", badge: "Бестселлер", img: "https://images.pexels.com/photos/568478/pexels-photo-568478.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { id: 2, name: "Изумрудная соната", desc: "Гортензии изумруд, пионовидные розы, папоротник", price: "€189", badge: "Premium", img: "https://images.pexels.com/photos/1024985/pexels-photo-1024985.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { id: 3, name: "Золотой закат", desc: "Кустовые розы шампань, ранункулюсы, сухоцветы с золотом", price: "€142", badge: "Эксклюзив", img: "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { id: 4, name: "Королевский кармин", desc: "Алые тюльпаны, бордовые орхидеи, изумрудный рускус", price: "€205", badge: "", img: "https://images.pexels.com/photos/1267341/pexels-photo-1267341.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { id: 5, name: "Соблазн Марии-Антуанетты", desc: "Пионы, гортензия, розовый перец, нотки лаванды", price: "€225", badge: "Новинка", img: "https://images.pexels.com/photos/1181744/pexels-photo-1181744.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { id: 6, name: "Версальский сад", desc: "Белая роза, изумрудный самшит, анемоны", price: "€178", badge: "", img: "https://images.pexels.com/photos/1361294/pexels-photo-1361294.jpeg?auto=compress&cs=tinysrgb&w=600" }
+    ];
+
+    // Функция рендера карточки
+    function renderProductCard(product) {
+        return `
+            <div class="product-card" data-id="${product.id}">
+                <div class="card-img" style="background-image: url('${product.img}');">
+                    ${product.badge ? `<div class="card-badge">${product.badge}</div>` : ''}
+                </div>
+                <div class="card-info">
+                    <div class="card-title">${product.name}</div>
+                    <div class="card-desc">${product.desc}</div>
+                    <div class="price">${product.price}</div>
+                    <button class="btn-order order-btn" data-name="${product.name}">ЗАКАЗАТЬ</button>
+                </div>
+            </div>
+        `;
+    
+    // отрисовать preview (первые 3) на главной
+    function renderPreview() {
+        const previewContainer = document.getElementById('preview-products');
+        if (previewContainer) {
+            const previewItems = catalogItems.slice(0, 3);
+            previewContainer.innerHTML = previewItems.map(item => renderProductCard(item)).join('');
+            attachOrderEvents();
+        }
+  
+    // полный каталог
+    function renderFullCatalog() {
+        const catalogContainer = document.getElementById('full-catalog-grid');
+        if (catalogContainer) {
+            catalogContainer.innerHTML = catalogItems.map(item => renderProductCard(item)).join('');
+            attachOrderEvents();
+        }
+    }
+
+    // событие для кнопок заказа (всплывающее уведомление)
+    function attachOrderEvents() {
+        const btns = document.querySelectorAll('.order-btn');
+        btns.forEach(btn => {
+            btn.removeEventListener('click', orderHandler);
+            btn.addEventListener('click', orderHandler);
+        });
+    }
+
+    function orderHandler(e) {
+        e.stopPropagation();
+        const name = this.getAttribute('data-name') || "букет";
+        const toast = document.getElementById('toastMsg');
+        toast.textContent = `💐 «${name}» добавлен в корзину. С вами свяжется флорист.`;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2200);
+    }
+
+    // Переключение между страницами (многостраничная навигация)
+    function navigateTo(pageId) {
+        // скрыть все страницы
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active-page');
+        });
+        const activePage = document.getElementById(`${pageId}-page`);
+        if (activePage) activePage.classList.add('active-page');
+        
+        // обновить активный класс в навигации
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-page') === pageId) {
+                link.classList.add('active');
+            }
+        });
+        
+        // если открыт каталог, гарантированно перерендерить полный список (чтобы навигация работала корректно)
+        if (pageId === 'catalog') {
+            renderFullCatalog();
+        }
+        // Если главная — убедиться, что preview показан
+        if (pageId === 'home') {
+            renderPreview();
+        }
+        // скролл к началу для удобства
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // обработчик кликов по меню
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = link.getAttribute('data-page');
+            if (page) navigateTo(page);
+        });
+    });
+
+    // кнопка "Весь ассортимент" на главной
+    const goToCatalogBtn = document.getElementById('goToCatalogBtn');
+    if (goToCatalogBtn) {
+        goToCatalogBtn.addEventListener('click', () => {
+            navigateTo('catalog');
+        });
+    }
+
+    // инициализация: показать главную страницу, отрисовать preview, также прописать каталог (но он скрыт)
+    renderPreview();
+    renderFullCatalog(); // рендерим каталог для фоновой готовности (скрыт, но когда откроется уже отрисован)
+
+    // дополнительная обработка для того, чтобы при первом клике на каталог не было пусто
+    // навигация по умолчанию уже активна (home-page активна)
+    // чтобы при переходе на каталог через прямую ссылку с главной корректно работало
+    // все товары имеют обработчики заказов
+    
+    // изящный эффект для карточек: добавим hover подсказки (уже в CSS)
+    
+    // полукруглая фотография уже есть в разметке. Для смены фото (дополнительная атмосфера) можно загружать несколько, но оставляем изящный вариант.
+    console.log("Магазин Maison Fleur — роскошь и элегантность");
+</script>
+</body>
+</html>
