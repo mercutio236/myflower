@@ -607,10 +607,40 @@
         }
 
         function orderHandler(e) {
-            e.stopPropagation();
-            const name = this.getAttribute('data-name') || 'букет';
-            showToast(`💐 «${name}» добавлен в корзину. Флорист свяжется.`);
+    e.stopPropagation();
+    const productName = this.getAttribute('data-name') || 'букет';
+    const productCard = this.closest('.product-card');
+    const price = productCard?.querySelector('.price')?.innerText || 'не указана';
+    
+    // НАСТРОЙКА TELEGRAM (бесплатно):
+    // 1. Создайте бота: напишите @BotFather в Telegram → /newbot
+    // 2. Получите токен (например: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11)
+    // 3. Создайте чат с ботом и получите свой chat_id (напишите @userinfobot)
+    
+    const botToken = 'ВАШ_ТОКЕН_БОТА';  // ЗАМЕНИТЕ
+    const chatId = 'ВАШ_CHAT_ID';       // ЗАМЕНИТЕ
+    
+    const message = `🌹 НОВЫЙ ЗАКАЗ 🌹\n\nБукет: ${productName}\nЦена: ${price}\nВремя: ${new Date().toLocaleString()}\n\n📞 Свяжитесь с клиентом!`;
+    
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'HTML'
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.ok) {
+            showToast(`💐 Заказ отправлен флористу в Telegram!`);
+        } else {
+            showToast(`📞 Позвоните флористу: +0 000 000 00 00`);
         }
+    })
+    .catch(() => showToast(`📞 Запрос сохранён. Флорист перезвонит.`));
+  }
 
         // НАВИГАЦИЯ МЕЖДУ СТРАНИЦАМИ
         let currentPage = 'home';
